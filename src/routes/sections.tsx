@@ -38,44 +38,30 @@ export function Router() {
   return useRoutes([
     {
       element: (
-        <DashboardLayout>
-          <Suspense fallback={renderFallback}>
-            <Outlet />
-          </Suspense>
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <Suspense fallback={renderFallback}>
+              <Outlet />
+            </Suspense>
+          </DashboardLayout>
+        </ProtectedRoute>
       ),
       children: [
         {
-          element: (
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          ),
+          element: <HomePage />,
           index: true,
         },
         {
           path: 'user',
-          element: (
-            <ProtectedRoute>
-              <UserPage />
-            </ProtectedRoute>
-          ),
+          element: <UserPage />,
         },
         {
           path: 'products',
-          element: (
-            <ProtectedRoute>
-              <ProductsPage />
-            </ProtectedRoute>
-          ),
+          element: <ProductsPage />,
         },
         {
           path: 'blog',
-          element: (
-            <ProtectedRoute>
-              <BlogPage />
-            </ProtectedRoute>
-          ),
+          element: <BlogPage />,
         },
       ],
     },
