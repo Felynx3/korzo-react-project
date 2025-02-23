@@ -1,5 +1,6 @@
 import type { ReactNode, ReactElement } from 'react';
 
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@workos-inc/authkit-react';
 
@@ -12,13 +13,17 @@ export function ProtectedRoute({ children }: ProtectedRouteProps): ReactElement 
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!isLoading && !user) {
+      navigate('/sign-in'); // TODO: magic string
+    }
+  }, [user, isLoading, navigate]);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   if (!user) {
-    navigate('/sign-in'); // TODO: magic string
-
     return null;
   }
 
