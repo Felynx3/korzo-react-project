@@ -902,6 +902,18 @@
   dependencies:
     "@swc/core" "^1.5.7"
 
+"@workos-inc/authkit-js@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@workos-inc/authkit-js/-/authkit-js-0.9.0.tgz#35d64d2a2cab04e95fcd5b2c82d46dde065a3f94"
+  integrity sha512-zcl2W9LpmoIqDTnFnv6vHfWKJjZUTxZIdw5IfPL5DDTKrvH49qIRudmMIP4dCWYXIKcnMVA5lGU/PuHsimTjDQ==
+
+"@workos-inc/authkit-react@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@workos-inc/authkit-react/-/authkit-react-0.9.0.tgz#d7ba2edf7b52e732f101aa1580c44f01311e90b7"
+  integrity sha512-5JJOGwslFw5eL5uEr5vYZghS/BxTWY66d4nAnopk/L46HLqUNIgjfnVBzztGWOZk1pGUFx8s5DSoXFsdGWt0gw==
+  dependencies:
+    "@workos-inc/authkit-js" "0.9.0"
+
 "@yr/monotone-cubic-spline@^1.0.3":
   version "1.0.3"
   resolved "https://registry.npmjs.org/@yr/monotone-cubic-spline/-/monotone-cubic-spline-1.0.3.tgz"

@@ -8,6 +8,8 @@ import { varAlpha } from 'src/theme/styles';
 import { AuthLayout } from 'src/layouts/auth';
 import { DashboardLayout } from 'src/layouts/dashboard';
 
+import { ProtectedRoute } from './components/protected-route';
+
 // ----------------------------------------------------------------------
 
 export const HomePage = lazy(() => import('src/pages/home'));
@@ -43,10 +45,38 @@ export function Router() {
         </DashboardLayout>
       ),
       children: [
-        { element: <HomePage />, index: true },
-        { path: 'user', element: <UserPage /> },
-        { path: 'products', element: <ProductsPage /> },
-        { path: 'blog', element: <BlogPage /> },
+        {
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
+          index: true,
+        },
+        {
+          path: 'user',
+          element: (
+            <ProtectedRoute>
+              <UserPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'products',
+          element: (
+            <ProtectedRoute>
+              <ProductsPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: 'blog',
+          element: (
+            <ProtectedRoute>
+              <BlogPage />
+            </ProtectedRoute>
+          ),
+        },
       ],
     },
     {
