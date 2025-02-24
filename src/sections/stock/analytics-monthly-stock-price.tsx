@@ -1,4 +1,5 @@
 import Card from '@mui/material/Card';
+import { CardContent } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 
@@ -15,16 +16,19 @@ interface AnalyticsStockPriceProps {
 export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
   const { monthlyStockHistory, status } = useMonthlyStockPriceHistory(name);
 
+  const isLoading = status === FetchStatus.Loading;
+
   const theme = useTheme();
 
   const chartOptions = useChart({
-    colors: [theme.palette.primary.dark],
+    colors: [isLoading ? theme.palette.grey.A400 : theme.palette.primary.dark],
     stroke: {
       width: 2,
       colors: ['transparent'],
     },
     xaxis: {
-      categories: monthlyStockHistory?.monthPrices.map(({ month }) => monthsNames[month - 1]),
+      categories:
+        monthlyStockHistory?.monthPrices.map(({ month }) => monthsNames[month - 1]) ?? monthsNames,
     },
     legend: {
       show: true,
@@ -33,21 +37,22 @@ export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
       y: {
         formatter: (value: number) => `${value} USD`,
       },
+      enabled: !isLoading,
     },
   });
 
-  if (status === FetchStatus.Loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (status === FetchStatus.Error || !monthlyStockHistory) {
-    return <Card>Error loading {name}&apos;s stock price history</Card>;
+  if (status === FetchStatus.Error) {
+    return (
+      <Card>
+        <CardContent>Error loading {name}&apos;s stock price history</CardContent>
+      </Card>
+    );
   }
 
   return (
     <Card>
       <CardHeader
-        title={monthlyStockHistory.name}
+        title={monthlyStockHistory?.name ?? `Loading ${name} stock price history...`}
         subheader="end-of-day price for the last 12 months"
       />
 
@@ -56,7 +61,9 @@ export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
         series={[
           {
             name: 'Price',
-            data: monthlyStockHistory.monthPrices.map(({ price }) => price),
+            data:
+              monthlyStockHistory?.monthPrices.map(({ price }) => price) ??
+              monthsNames.map(() => 100),
           },
         ]}
         options={chartOptions}
