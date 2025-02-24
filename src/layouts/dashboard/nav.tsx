@@ -89,7 +89,7 @@ export function NavMobile({
     if (open) {
       onClose();
     }
-    // eslint-disable-next-line react-api/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
   return (
