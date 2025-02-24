@@ -1,7 +1,9 @@
 import Card from '@mui/material/Card';
-import { Chart, useChart } from 'src/components/chart';
 import { useTheme } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
+
+import { Chart, useChart } from 'src/components/chart';
+
 import {
   FetchStatus,
   useMonthlyStockPriceHistory,
@@ -16,14 +18,6 @@ interface AnalyticsStockPriceProps {
 export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
   const { monthlyStockHistory, status } = useMonthlyStockPriceHistory(name);
 
-  if (status === FetchStatus.Loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (status === FetchStatus.Error || !monthlyStockHistory) {
-    return <Card>Error loading {name}'s stock price history</Card>;
-  }
-
   const theme = useTheme();
 
   const chartOptions = useChart({
@@ -33,7 +27,7 @@ export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
       colors: ['transparent'],
     },
     xaxis: {
-      categories: monthlyStockHistory.monthPrices.map(({ month }) => monthsNames[month - 1]),
+      categories: monthlyStockHistory?.monthPrices.map(({ month }) => monthsNames[month - 1]),
     },
     legend: {
       show: true,
@@ -45,10 +39,18 @@ export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
     },
   });
 
+  if (status === FetchStatus.Loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (status === FetchStatus.Error || !monthlyStockHistory) {
+    return <Card>Error loading {name}&apos;s stock price history</Card>;
+  }
+
   return (
     <Card>
       <CardHeader
-        title={monthlyStockHistory.displayName}
+        title={monthlyStockHistory.name}
         subheader="end-of-day price for the last 12 months"
       />
 
