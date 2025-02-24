@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { StocksApi } from '../api/stocks-api';
 
-import type { MonthlyStockHistory } from '../../stock/types/monthly-stock-history';
+import type { MonthlyStockHistory } from '../types/monthly-stock-history';
 
 // TODO: This should be implemented in a separate file to be used by other use cases
 export enum FetchStatus {

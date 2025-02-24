@@ -1,4 +1,4 @@
-import type { MonthlyStockHistory } from '../../stock/types/monthly-stock-history';
+import type { MonthlyStockHistory } from '../types/monthly-stock-history';
 
 if (!import.meta.env.VITE_STOCKS_API_URL) {
   throw new Error('VITE_STOCKS_API_URL is not defined');

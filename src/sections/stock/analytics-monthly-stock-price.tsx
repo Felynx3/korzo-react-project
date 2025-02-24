@@ -4,10 +4,7 @@ import CardHeader from '@mui/material/CardHeader';
 
 import { Chart, useChart } from 'src/components/chart';
 
-import {
-  FetchStatus,
-  useMonthlyStockPriceHistory,
-} from '../product/hooks/use-monthly-stock-price-history';
+import { FetchStatus, useMonthlyStockPriceHistory } from './hooks/use-monthly-stock-price-history';
 
 // ----------------------------------------------------------------------
 
