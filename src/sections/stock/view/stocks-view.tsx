@@ -15,7 +15,15 @@ export function StocksView(): ReactElement {
 
       <Grid container spacing={3}>
         <Grid xs={12} md={6} lg={8}>
-          <AnalyticsMonthlyStockPrice name={'AAPL'} />
+          <AnalyticsMonthlyStockPrice name="AAPL" />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={8}>
+          <AnalyticsMonthlyStockPrice name="GOOGL" />
+        </Grid>
+
+        <Grid xs={12} md={6} lg={8}>
+          <AnalyticsMonthlyStockPrice name="MSFT" />
         </Grid>
       </Grid>
     </DashboardContent>
