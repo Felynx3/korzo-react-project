@@ -34,7 +34,7 @@ export function AnalyticsMonthlyStockPrice({ name }: AnalyticsStockPriceProps) {
     },
     tooltip: {
       y: {
-        formatter: (value: number) => `${value} visits`,
+        formatter: (value: number) => `${value} USD`,
       },
     },
   });
