@@ -1,15 +1,21 @@
-import { MonthlyStockHistory } from '../../stock/types/monthly-stock-history';
+import type { MonthlyStockHistory } from '../../stock/types/monthly-stock-history';
+
+if (!import.meta.env.VITE_STOCKS_API_URL) {
+  throw new Error('VITE_STOCKS_API_URL is not defined');
+}
 
 export const StocksApi = {
   getMonthlyStockPrice: async (name: string): Promise<MonthlyStockHistory> => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    const response = await fetch(
+      `${import.meta.env.VITE_STOCKS_API_URL}/stocks/${name}/monthlyPriceHistory`
+    );
 
-    if (name === 'AAPL') {
-      return appleStock;
+    if (!response.ok) {
+      // TODO: It should throw a custom error and be handled to show a human-readable message
+      throw new Error('Stock not found');
     }
 
-    // TODO: It should throw a custom error and be handled to show a human-readable message
-    throw new Error('Stock not found');
+    return response.json();
   },
 };
 
